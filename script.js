@@ -182,28 +182,4 @@ if (nextBtn) nextBtn.addEventListener("click", () => {
   playTrackAtIndex(currentTrackIndex + 1);
 });
 
-function updateDateTime() {
-  const dateEl = document.getElementById("live-date");
-  const timeEl = document.getElementById("live-time");
-  if (!dateEl && !timeEl) return;
 
-  const now = new Date();
-
-  if (dateEl) {
-    dateEl.textContent = now.toLocaleDateString(undefined, {
-      day: "2-digit",
-      month: "short",
-      year: "numeric"
-    });
-  }
-
-  if (timeEl) {
-    timeEl.textContent = now.toLocaleTimeString(undefined, {
-      hour: "2-digit",
-      minute: "2-digit"
-    });
-  }
-}
-
-updateDateTime();
-setInterval(updateDateTime, 1000);
