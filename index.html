@@ -3,149 +3,603 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sukoon. Music for quiet nights, long drives and peaceful moments.">
+
+  <meta
+    name="description"
+    content="Sukoon. Music for quiet nights, long drives and peaceful moments."
+  >
+
   <title>Sukoon | Music for the Soul</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
   <link rel="stylesheet" href="style.css">
+
+  <!-- Color + readability adjustments -->
+  <style>
+    :root {
+      --sukoon-brown: #3B1F1A;
+      --sukoon-brown-soft: #5A352C;
+      --sukoon-terracotta: #C85F3D;
+      --sukoon-red: #D9574F;
+      --sukoon-cream: #FFF3DF;
+      --sukoon-muted: #765C52;
+    }
+
+    /*
+      Central readability layer.
+      This makes the text readable over the person,
+      guitar and bright sunset without looking like a box.
+    */
+    .hero-content {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero-content::before {
+      content: "";
+      position: absolute;
+
+      width: 760px;
+      height: 500px;
+
+      left: 50%;
+      top: 48%;
+
+      transform: translate(-50%, -50%);
+
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(255, 235, 205, 0.38) 0%,
+          rgba(255, 235, 205, 0.20) 35%,
+          rgba(255, 235, 205, 0.07) 58%,
+          transparent 75%
+        );
+
+      filter: blur(12px);
+
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Main Sukoon logo */
+    .hero-content h1 {
+      color: var(--sukoon-brown) !important;
+
+      text-shadow:
+        0 2px 8px rgba(255, 240, 215, 0.45),
+        0 4px 20px rgba(60, 30, 20, 0.08);
+    }
+
+    /* Feel the music */
+    .script-line {
+      color: var(--sukoon-terracotta) !important;
+
+      text-shadow:
+        0 1px 8px rgba(255, 235, 210, 0.5);
+    }
+
+    /* Hindi Sukoon */
+    .hindi {
+      color: var(--sukoon-red) !important;
+
+      text-shadow:
+        0 2px 8px rgba(255, 235, 215, 0.5);
+    }
+
+    /* Small decorative lines */
+    .wave-line {
+      color: var(--sukoon-terracotta) !important;
+    }
+
+    /* MUSIC • MEMORIES • MOMENTS */
+    .eyebrow {
+      color: var(--sukoon-brown-soft) !important;
+
+      text-shadow:
+        0 1px 5px rgba(255, 235, 210, 0.6);
+    }
+
+    /* Description */
+    .description {
+      color: var(--sukoon-brown-soft) !important;
+
+      text-shadow:
+        0 1px 6px rgba(255, 240, 220, 0.55);
+    }
+
+    .description strong {
+      color: var(--sukoon-brown) !important;
+    }
+
+    /* Brand */
+    .brand {
+      color: var(--sukoon-brown) !important;
+    }
+
+    .brand span {
+      color: var(--sukoon-terracotta) !important;
+    }
+
+    /* Listening indicator */
+    .online {
+      color: var(--sukoon-brown-soft) !important;
+    }
+
+    /* Social icons */
+    .topbar nav a {
+      color: var(--sukoon-brown) !important;
+    }
+
+    /* Playlist heading */
+    .panel-title {
+      color: var(--sukoon-brown) !important;
+    }
+
+    .panel-title span {
+      color: var(--sukoon-terracotta) !important;
+    }
+
+    /* Playlist titles */
+    .playlist-item strong {
+      color: var(--sukoon-brown) !important;
+    }
+
+    .playlist-item small {
+      color: var(--sukoon-muted) !important;
+    }
+
+    .playlist-item .arrow {
+      color: var(--sukoon-terracotta) !important;
+    }
+
+    /* Author */
+    .description strong {
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /*
+      Slightly stronger text shadow only on the main logo.
+      Keeps it readable when it crosses the person's face.
+    */
+    .hero-content h1 {
+      -webkit-text-stroke: 0.3px rgba(59, 31, 26, 0.12);
+    }
+  </style>
 </head>
 
 <body>
-<!-- <div class="live-datetime"><span id="live-date">--</span><span>•</span><span id="live-time">--:--</span></div> -->
+
+  <!-- Optional live date/time -->
+  <!--
+  <div class="live-datetime">
+    <span id="live-date">--</span>
+    <span>•</span>
+    <span id="live-time">--:--</span>
+  </div>
+  -->
+
   <div class="background"></div>
   <div class="background-tint"></div>
   <div class="grain"></div>
 
+
+  <!-- =========================
+       TOP BAR
+  ========================== -->
+
   <header class="topbar">
-    <a href="#" class="brand">sukoon<span>.</span></a>
+
+    <a href="#" class="brand">
+      sukoon<span>.</span>
+    </a>
 
     <div class="online" aria-live="polite">
       <span></span>
-      <strong id="listener-count-top"></strong> listening now
+      <strong id="listener-count-top"></strong>
+      listening now
     </div>
 
+
+    <!-- Social Links -->
+
     <nav>
-      <a href="https://www.instagram.com/dataandaiwithnikhil" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.16.55.55.9 1.11 1.16 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.16 1.77 4.9 4.9 0 0 1-1.77 1.16c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.16 4.9 4.9 0 0 1-1.16-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43a4.9 4.9 0 0 1 1.16-1.77A4.9 4.9 0 0 1 5.46 2.53c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.28 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2A3.2 3.2 0 1 1 12 8.8a3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4z"/></svg>
+
+      <!-- Instagram -->
+      <a
+        href="https://www.instagram.com/dataandaiwithnikhil"
+        target="_blank"
+        rel="noopener"
+        aria-label="Instagram"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.16.55.55.9 1.11 1.16 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.16 1.77 4.9 4.9 0 0 1-1.77 1.16c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.16 4.9 4.9 0 0 1-1.16-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43a4.9 4.9 0 0 1 1.16-1.77A4.9 4.9 0 0 1 5.46 2.53c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.28 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2A3.2 3.2 0 1 1 12 8.8a3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4z"/>
+        </svg>
       </a>
-      <a href="https://www.linkedin.com/in/nikhil-meghnani/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18v-8.4H5.67V18h2.67zM7 8.48a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zM18.34 18h.01v-4.62c0-2.47-1.32-3.62-3.08-3.62-1.42 0-2.06.78-2.41 1.33V9.6h-2.67c.04.75 0 8.4 0 8.4h2.67v-4.69c0-.25.02-.5.1-.68.2-.5.66-1.03 1.44-1.03 1.02 0 1.43.78 1.43 1.91V18h2.51z"/></svg>
+
+
+      <!-- LinkedIn -->
+      <a
+        href="https://www.linkedin.com/in/nikhil-meghnani/"
+        target="_blank"
+        rel="noopener"
+        aria-label="LinkedIn"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18v-8.4H5.67V18h2.67zM7 8.48a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zM18.34 18h.01v-4.62c0-2.47-1.32-3.62-3.08-3.62-1.42 0-2.06.78-2.41 1.33V9.6h-2.67c.04.75 0 8.4 0 8.4h2.67v-4.69c0-.25.02-.5.1-.68.2-.5.66-1.03 1.44-1.03 1.02 0 1.43.78 1.43 1.91V18h2.51z"/>
+        </svg>
       </a>
-      <a href="https://www.youtube.com/@dataandaiwithnikhil" target="_blank" rel="noopener" aria-label="YouTube">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.5s-.23-1.64-.94-2.36c-.9-.94-1.9-.95-2.36-1C16.98 3 12 3 12 3h-.01s-4.98 0-8.19.14c-.46.05-1.46.06-2.36 1C.73 4.86.5 6.5.5 6.5S.27 8.42.27 10.35v1.79c0 1.93.23 3.85.23 3.85s.23 1.64.94 2.36c.9.94 2.08.9 2.6 1C5.85 20.98 12 21 12 21s5.98-.01 8.19-.15c.46-.06 1.46-.06 2.36-1 .71-.72.94-2.36.94-2.36s.23-1.92.23-3.85v-1.79c0-1.93-.23-3.85-.23-3.85zM9.55 14.7V8.3l6.16 3.2-6.16 3.2z"/></svg>
+
+
+      <!-- YouTube -->
+      <a
+        href="https://www.youtube.com/@dataandaiwithnikhil"
+        target="_blank"
+        rel="noopener"
+        aria-label="YouTube"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M23.5 6.5s-.23-1.64-.94-2.36c-.9-.94-1.9-.95-2.36-1C16.98 3 12 3 12 3h-.01s-4.98 0-8.19.14c-.46.05-1.46.06-2.36 1C.73 4.86.5 6.5.5 6.5S.27 8.42.27 10.35v1.79c0 1.93.23 3.85.23 3.85s.23 1.64.94 2.36c.9.94 2.08.9 2.6 1C5.85 20.98 12 21 12 21s5.98-.01 8.19-.15c.46-.06 1.46-.06 2.36-1 .71-.72.94-2.36.94-2.36s.23-1.92.23-3.85v-1.79c0-1.93-.23-3.85-.23-3.85zM9.55 14.7V8.3l6.16 3.2-6.16 3.2z"/>
+        </svg>
       </a>
+
     </nav>
+
   </header>
 
-  <main class="hero">
-    <section class="hero-content">
-      <p class="eyebrow">MUSIC • MEMORIES • MOMENTS</p>
-      <div class="script-line">feel the music</div>
 
-      <h1>sukoon</h1>
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <main class="hero">
+
+    <section class="hero-content">
+
+      <p class="eyebrow">
+        MUSIC • MEMORIES • MOMENTS
+      </p>
+
+      <div class="script-line">
+        feel the music
+      </div>
+
+      <h1>
+        sukoon
+      </h1>
 
       <div class="hindi-wrap">
-        <span class="wave-line">〰〰</span>
-        <div class="hindi">सुकून</div>
-        <span class="wave-line">〰〰</span>
+
+        <span class="wave-line">
+          〰〰
+        </span>
+
+        <div class="hindi">
+          सुकून
+        </div>
+
+        <span class="wave-line">
+          〰〰
+        </span>
+
       </div>
 
       <p class="description">
-        <strong>By Nikhil Meghnani</strong><br>
-        Music for quiet nights,<br>
+
+        <strong>
+          By Nikhil Meghnani
+        </strong>
+
+        <br>
+
+        Music for quiet nights,
+
+        <br>
+
         long drives and peaceful moments.
+
       </p>
 
     </section>
 
-    <button class="scroll-button" onclick="document.getElementById('player').scrollIntoView({behavior:'smooth'})">
+
+    <!-- Scroll Button -->
+
+    <button
+      class="scroll-button"
+      onclick="document.getElementById('player').scrollIntoView({behavior:'smooth'})"
+      aria-label="Scroll to music player"
+    >
       ↓
     </button>
+
   </main>
 
+
+  <!-- =========================
+       PLAYLIST PANEL
+  ========================== -->
+
   <aside class="playlist-panel">
+
     <div class="panel-title">
+
       <span>♪</span>
-      <strong>Playlists For You</strong>
+
+      <strong>
+        Playlists For You
+      </strong>
+
     </div>
 
-        <button class="playlist-item" data-playlist="Eq7_v0VgUVA" data-title="Arijit Singh • Essentials" data-subtitle="The best of Arijit Singh">
-      <span class="emoji">🌙</span>
+
+    <!-- Arijit -->
+
+    <button
+      class="playlist-item"
+      data-playlist="Eq7_v0VgUVA"
+      data-title="Arijit Singh • Essentials"
+      data-subtitle="The best of Arijit Singh"
+    >
+
+      <span class="emoji">
+        🌙
+      </span>
+
       <div>
-        <strong>Arijit Essentials</strong>
-        <small>Love • Soul • Memories</small>
+
+        <strong>
+          Arijit Essentials
+        </strong>
+
+        <small>
+          Love • Soul • Memories
+        </small>
+
       </div>
-      <span class="arrow">▶</span>
+
+      <span class="arrow">
+        ▶
+      </span>
+
     </button>
 
-    <button class="playlist-item" data-playlist="VZmInuvccAE" data-title="Justin Bieber Coachella" data-subtitle="Pop • Party • Sukoon">
-      <span class="emoji">🌧️</span>
+
+    <!-- Justin Bieber -->
+
+    <button
+      class="playlist-item"
+      data-playlist="VZmInuvccAE"
+      data-title="Justin Bieber Coachella"
+      data-subtitle="Pop • Party • Sukoon"
+    >
+
+      <span class="emoji">
+        🌧️
+      </span>
+
       <div>
-        <strong>Justin Bieber</strong>
-        <small>Pop • Party • Sukoon</small>
+
+        <strong>
+          Justin Bieber
+        </strong>
+
+        <small>
+          Pop • Party • Sukoon
+        </small>
+
       </div>
-      <span class="arrow">▶</span>
+
+      <span class="arrow">
+        ▶
+      </span>
+
     </button>
 
-    <button class="playlist-item" data-playlist="zgWtnCJpcVs" data-title="Punjabi Mashup" data-subtitle="Punjabi • Party • Music">
-      <span class="emoji">🚗</span>
+
+    <!-- Punjabi -->
+
+    <button
+      class="playlist-item"
+      data-playlist="zgWtnCJpcVs"
+      data-title="Punjabi Mashup"
+      data-subtitle="Punjabi • Party • Music"
+    >
+
+      <span class="emoji">
+        🚗
+      </span>
+
       <div>
-        <strong>Punjabi Hits</strong>
-        <small>Punjabi • Party • Music</small>
+
+        <strong>
+          Punjabi Hits
+        </strong>
+
+        <small>
+          Punjabi • Party • Music
+        </small>
+
       </div>
-      <span class="arrow">▶</span>
+
+      <span class="arrow">
+        ▶
+      </span>
+
     </button>
 
-    <button class="playlist-item" data-playlist="JOGxn-nmvXI" data-title="Road Trip" data-subtitle="Road Trip • Thoughts • Music">
-      <span class="emoji">🌌</span>
+
+    <!-- Road Trip -->
+
+    <button
+      class="playlist-item"
+      data-playlist="JOGxn-nmvXI"
+      data-title="Road Trip"
+      data-subtitle="Road Trip • Thoughts • Music"
+    >
+
+      <span class="emoji">
+        🌌
+      </span>
+
       <div>
-        <strong>Road Trip</strong>
-        <small>Road Trip • Thoughts • Music</small>
+
+        <strong>
+          Road Trip
+        </strong>
+
+        <small>
+          Road Trip • Thoughts • Music
+        </small>
+
       </div>
-      <span class="arrow">▶</span>
+
+      <span class="arrow">
+        ▶
+      </span>
+
     </button>
+
   </aside>
 
-  <!-- Compact floating player inspired by your reference -->
-  <section class="music-player" id="player">
+
+  <!-- =========================
+       MUSIC PLAYER
+  ========================== -->
+
+  <section
+    class="music-player"
+    id="player"
+  >
+
     <div class="album-art">
+
       <div class="album-sun"></div>
-      <span>sukoon</span>
-      <div class="album-wave">▁▃▅▃▁</div>
+
+      <span>
+        sukoon
+      </span>
+
+      <div class="album-wave">
+        ▁▃▅▃▁
+      </div>
+
     </div>
+
 
     <div class="track-details">
-      <div class="track-title">Arijit Singh • Essentials</div>
-      <div class="track-artist">The best of Arijit Singh</div>
-      <div class="progress-row">
-        <span class="dot"></span>
-        <div class="progress-track"><span></span></div>
-        <span class="duration">5:48</span>
+
+      <div class="track-title">
+        Arijit Singh • Essentials
       </div>
+
+      <div class="track-artist">
+        The best of Arijit Singh
+      </div>
+
+      <div class="progress-row">
+
+        <span class="dot"></span>
+
+        <div class="progress-track">
+          <span></span>
+        </div>
+
+        <span class="duration">
+          5:48
+        </span>
+
+      </div>
+
     </div>
 
-    <div class="player-controls">
-      <button class="control" id="prevBtn" aria-label="Previous song">|◀</button>
 
-      <button class="play" id="playBtn" aria-label="Play">
+    <div class="player-controls">
+
+      <button
+        class="control"
+        id="prevBtn"
+        aria-label="Previous song"
+      >
+        |◀
+      </button>
+
+
+      <button
+        class="play"
+        id="playBtn"
+        aria-label="Play"
+      >
         ▶
       </button>
 
-      <button class="control" id="nextBtn" aria-label="Next song">▶|</button>
+
+      <button
+        class="control"
+        id="nextBtn"
+        aria-label="Next song"
+      >
+        ▶|
+      </button>
+
     </div>
+
   </section>
-<div id="youtube-player" aria-label="YouTube player"></div>
+
+
+  <!-- Hidden YouTube player -->
+
+  <div
+    id="youtube-player"
+    aria-label="YouTube player"
+  ></div>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
 
   <footer>
-    <span>© 2026 Sukoon</span>
-    <span>♡ Made with music & peace</span>
+
+    <span>
+      © 2026 Sukoon
+    </span>
+
+    <span>
+      ♡ Made with music & peace
+    </span>
+
   </footer>
 
+
+  <!-- =========================
+       SCRIPTS
+  ========================== -->
+
   <script src="https://www.youtube.com/iframe_api"></script>
+
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
-<script src="script.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+
+  <script src="script.js"></script>
+
 </body>
 </html>
