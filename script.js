@@ -66,6 +66,7 @@ function onYouTubeIframeAPIReady() {
         playerReady = true;
         if (titleEl) titleEl.textContent = "Arijit Singh • Essentials";
         if (artistEl) artistEl.textContent = "The best of Arijit Singh";
+        if (playlistButtons[0]) playlistButtons[0].classList.add("active");
 
         player.cueVideoById(DEFAULT_VIDEO_ID);
 
@@ -119,25 +120,44 @@ function startYouTubeVideo(videoId, title, subtitle) {
   player.playVideo();
 }
 
-document.querySelectorAll(".playlist-item").forEach((button) => {
+const playlistButtons = Array.from(document.querySelectorAll(".playlist-item"));
+const playlist = playlistButtons.map((button) => ({
+  videoId: button.dataset.playlist || DEFAULT_VIDEO_ID,
+  title: button.dataset.title || "Arijit Singh • Essentials",
+  subtitle: button.dataset.subtitle || "The best of Arijit Singh"
+}));
+
+let currentTrackIndex = 0;
+
+function playTrackAtIndex(index) {
+  if (playlist.length === 0) return;
+
+  currentTrackIndex = (index + playlist.length) % playlist.length;
+  const track = playlist[currentTrackIndex];
+
+  playlistButtons.forEach((item) => item.classList.remove("active"));
+  if (playlistButtons[currentTrackIndex]) playlistButtons[currentTrackIndex].classList.add("active");
+
+  startYouTubeVideo(track.videoId, track.title, track.subtitle);
+}
+
+playlistButtons.forEach((button, index) => {
   button.addEventListener("click", function () {
-    const videoId = this.dataset.playlist || DEFAULT_VIDEO_ID;
-    const title = this.dataset.title || "Arijit Singh • Essentials";
-    const subtitle = this.dataset.subtitle || "The best of Arijit Singh";
-
-    document.querySelectorAll(".playlist-item").forEach((item) => item.classList.remove("active"));
-    this.classList.add("active");
-
-    startYouTubeVideo(videoId, title, subtitle);
+    playTrackAtIndex(index);
   });
 });
 
 if (playBtn) {
   playBtn.addEventListener("click", function () {
     if (!playerReady || !player) {
-      pendingVideoId = DEFAULT_VIDEO_ID;
-      pendingTitle = "Arijit Singh • Essentials";
-      pendingSubtitle = "The best of Arijit Singh";
+      const track = playlist[currentTrackIndex] || {
+        videoId: DEFAULT_VIDEO_ID,
+        title: "Arijit Singh • Essentials",
+        subtitle: "The best of Arijit Singh"
+      };
+      pendingVideoId = track.videoId;
+      pendingTitle = track.title;
+      pendingSubtitle = track.subtitle;
       return;
     }
 
@@ -149,17 +169,17 @@ if (playBtn) {
       player.unMute();
       player.playVideo();
     } else {
-      startYouTubeVideo(DEFAULT_VIDEO_ID, "Arijit Singh • Essentials", "The best of Arijit Singh");
+      playTrackAtIndex(currentTrackIndex);
     }
   });
 }
 
 if (prevBtn) prevBtn.addEventListener("click", () => {
-  if (playerReady && player) player.seekTo(0, true);
+  playTrackAtIndex(currentTrackIndex - 1);
 });
 
 if (nextBtn) nextBtn.addEventListener("click", () => {
-  if (playerReady && player) player.seekTo(0, true);
+  playTrackAtIndex(currentTrackIndex + 1);
 });
 
 function updateDateTime() {
