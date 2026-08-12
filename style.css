@@ -1,0 +1,585 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #351d18;
+  font-family: "Inter", Arial, sans-serif;
+  background: #f3dcc0;
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  background: url("assets/sukoon-background.jpg") center center / cover no-repeat;
+  transform: scale(1.015);
+}
+
+.background-tint {
+  position: fixed;
+  inset: 0;
+  z-index: -9;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255,244,225,.08), rgba(255,239,214,.01) 55%, rgba(61,28,19,.08)),
+    linear-gradient(0deg, rgba(255,235,203,.10), rgba(255,255,255,.02));
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: .045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
+
+.topbar {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  color: #351d18;
+  text-decoration: none;
+  font: 600 38px/1 "Cormorant Garamond", serif;
+}
+
+.brand span {
+  color: #d87535;
+}
+
+.online {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #3c2821;
+}
+
+.online span {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #25b95b;
+  box-shadow: 0 0 10px rgba(37,185,91,.55);
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+}
+
+nav a {
+  color: #351d18;
+  text-decoration: none;
+  font-size: 11px;
+  padding: 10px 15px;
+  border: 1px solid rgba(53,29,24,.18);
+  border-radius: 30px;
+  background: rgba(255,248,237,.38);
+  backdrop-filter: blur(10px);
+  transition: .2s ease;
+}
+
+nav a:hover {
+  background: rgba(255,255,255,.68);
+  transform: translateY(-2px);
+}
+
+.hero {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 90px 30px 190px;
+  position: relative;
+}
+
+.hero-content {
+  margin-left: -125px;
+  margin-top: 10px;
+  animation: appear .9s ease both;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: #704b3e;
+  font-size: 9px;
+  letter-spacing: 5px;
+}
+
+.script-line {
+  margin-left: 205px;
+  margin-bottom: -3px;
+  color: #c96132;
+  font: italic 48px/.8 "Cormorant Garamond", serif;
+  transform: rotate(-4deg);
+}
+
+h1 {
+  margin: 0;
+  color: #351d18;
+  font: 600 clamp(90px, 14vw, 175px)/.72 "Cormorant Garamond", serif;
+  letter-spacing: -7px;
+  text-shadow: 0 4px 22px rgba(255,255,255,.22);
+}
+
+.hindi-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.hindi {
+  color: #d95354;
+  font: 600 clamp(35px, 4vw, 50px)/1 serif;
+}
+
+.wave-line {
+  color: #d96b3b;
+  font-size: 22px;
+  letter-spacing: -5px;
+}
+
+.description {
+  margin: 20px auto 24px;
+  color: #3d2923;
+  font-size: 13px;
+  line-height: 1.8;
+  letter-spacing: 2px;
+}
+
+
+.listen-button:hover {
+  transform: translateY(-3px);
+  background: #ffd67f;
+}
+
+.scroll-button {
+  position: absolute;
+  bottom: 145px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(53,29,24,.28);
+  border-radius: 50%;
+  color: #351d18;
+  background: rgba(255,248,237,.38);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+.playlist-panel {
+  position: fixed;
+  z-index: 15;
+  right: 40px;
+  top: 25%;
+  width: 305px;
+  padding: 17px 20px;
+  border: 1px solid rgba(90,50,35,.16);
+  border-radius: 18px;
+  background: rgba(255,249,237,.76);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 50px rgba(73,35,20,.15);
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 2px 12px;
+  border-bottom: 1px solid rgba(90,50,35,.13);
+}
+
+.panel-title span {
+  color: #c9673c;
+  font-size: 18px;
+}
+
+.panel-title strong {
+  font: 600 21px "Cormorant Garamond", serif;
+}
+
+.playlist-item {
+  width: 100%;
+  border: 0;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 36px 1fr 20px;
+  gap: 10px;
+  align-items: center;
+  padding: 13px 3px;
+  color: #3b211b;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(90,50,35,.10);
+  transition: .2s;
+}
+
+.playlist-item:last-child {
+  border-bottom: 0;
+}
+
+.playlist-item:hover {
+  transform: translateX(-3px);
+}
+
+.emoji {
+  font-size: 22px;
+}
+
+.playlist-item strong {
+  display: block;
+  font: 600 18px "Cormorant Garamond", serif;
+}
+
+.playlist-item small {
+  display: block;
+  margin-top: 2px;
+  color: #795f56;
+  font-size: 9px;
+}
+
+.arrow {
+  color: #bc6839;
+  font-size: 17px;
+}
+
+/* Compact dark player inspired by the reference image */
+.music-player {
+  position: fixed;
+  z-index: 30;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  width: min(760px, calc(100% - 36px));
+  height: 104px;
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr) 145px;
+  align-items: center;
+  gap: 13px;
+  padding: 10px 15px 10px 8px;
+  color: #f7e9da;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 52px;
+  background: linear-gradient(100deg, rgba(49,20,16,.97), rgba(75,31,23,.96));
+  box-shadow:
+    0 20px 45px rgba(43,18,13,.30),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(16px);
+}
+
+.album-art {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 7px;
+  border-radius: 50%;
+  color: white;
+  background:
+    radial-gradient(circle at 50% 22%, #ffd17a 0 9%, transparent 10%),
+    linear-gradient(160deg, #7d3b2b, #e88b54 55%, #3a1a17);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.08);
+  font: italic 600 10px "Cormorant Garamond", serif;
+}
+
+.album-sun {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 13px;
+  border-radius: 50%;
+  background: #ffd27e;
+  opacity: .9;
+}
+
+.album-wave {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: 0;
+  opacity: .9;
+}
+
+.track-details {
+  min-width: 0;
+}
+
+.track-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff3e8;
+}
+
+.track-artist {
+  margin-top: 3px;
+  font-size: 10px;
+  color: #cdb5a8;
+}
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 9px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #f5eadf;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.03);
+}
+
+.progress-track {
+  height: 4px;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 10px;
+  background: rgba(255,255,255,.28);
+}
+
+.progress-track span {
+  display: block;
+  width: 27%;
+  height: 100%;
+  border-radius: inherit;
+  background: #eadbcd;
+}
+
+.duration {
+  font-size: 9px;
+  color: #bfa99d;
+  white-space: nowrap;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+}
+
+.control {
+  border: 0;
+  padding: 5px;
+  color: #eee0d5;
+  background: transparent;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.play {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #40251d;
+  background: #f8eee2;
+  text-decoration: none;
+  font-size: 15px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.16);
+  transition: .2s;
+}
+
+.play:hover {
+  transform: scale(1.05);
+}
+
+footer {
+  position: fixed;
+  z-index: 10;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 14px;
+  color: rgba(64,39,31,.68);
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+@media (max-width: 1000px) {
+  .hero-content {
+    margin-left: -90px;
+  }
+
+  .playlist-panel {
+    right: 18px;
+    width: 270px;
+  }
+}
+
+@media (max-width: 780px) {
+  .topbar {
+    padding: 17px;
+  }
+
+  .brand {
+    font-size: 31px;
+  }
+
+  .online {
+    display: none;
+  }
+
+  nav a {
+    padding: 7px 9px;
+    font-size: 9px;
+  }
+
+  .hero {
+    padding: 100px 20px 300px;
+  }
+
+  .hero-content {
+    margin-left: 0;
+  }
+
+  .script-line {
+    margin-left: 85px;
+    font-size: 31px;
+  }
+
+  h1 {
+    font-size: clamp(78px, 22vw, 125px);
+  }
+
+  .playlist-panel {
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 30px);
+    max-width: 430px;
+  }
+
+  .music-player {
+    bottom: 14px;
+    width: calc(100% - 16px);
+    height: 86px;
+    grid-template-columns: 54px minmax(0, 1fr) 86px;
+    gap: 9px;
+    padding: 8px;
+    border-radius: 44px;
+  }
+
+  .album-art {
+    width: 54px;
+    height: 54px;
+  }
+
+  .track-title {
+    font-size: 12px;
+  }
+
+  .track-artist {
+    font-size: 9px;
+  }
+
+  .progress-row {
+    margin-top: 7px;
+  }
+
+  .player-controls {
+    gap: 7px;
+  }
+
+  .control {
+    font-size: 12px;
+  }
+
+  .play {
+    width: 42px;
+    height: 42px;
+  }
+
+  footer {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  nav a:nth-child(1) {
+    display: none;
+  }
+
+  .description {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .playlist-panel {
+    bottom: 145px;
+  }
+
+  .music-player {
+    grid-template-columns: 48px minmax(0, 1fr) 76px;
+  }
+
+  .album-art {
+    width: 48px;
+    height: 48px;
+  }
+
+  .control:first-child {
+    display: none;
+  }
+
+  .duration {
+    display: none;
+  }
+}
+
+/* YouTube player host. It stays out of the visual design but remains a real iframe. */
+#youtube-player {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  left: 2px;
+  bottom: 2px;
+  opacity: 0.01;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.live-datetime{position:fixed;top:22px;left:28px;z-index:20;display:flex;gap:9px;padding:9px 13px;border-radius:999px;background:rgba(38,26,21,.55);border:1px solid rgba(255,244,224,.14);backdrop-filter:blur(12px);color:rgba(255,248,235,.9);font-size:12px}
