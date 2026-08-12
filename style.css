@@ -84,19 +84,28 @@ body {
 
 nav {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
   color: #351d18;
   text-decoration: none;
-  font-size: 11px;
-  padding: 10px 15px;
   border: 1px solid rgba(53,29,24,.18);
-  border-radius: 30px;
+  border-radius: 50%;
   background: rgba(255,248,237,.38);
   backdrop-filter: blur(10px);
   transition: .2s ease;
+}
+
+nav a svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 nav a:hover {
@@ -249,6 +258,21 @@ h1 {
 
 .playlist-item:hover {
   transform: translateX(-3px);
+}
+
+.playlist-item.active {
+  background: rgba(201,103,60,.14);
+  border-radius: 12px;
+  transform: translateX(-3px);
+}
+
+.playlist-item.active strong {
+  color: #c9673c;
+}
+
+.playlist-item.active .arrow {
+  color: #c9673c;
+  transform: scale(1.15);
 }
 
 .emoji {
@@ -539,10 +563,6 @@ footer {
 }
 
 @media (max-width: 480px) {
-  nav a:nth-child(1) {
-    display: none;
-  }
-
   .description {
     font-size: 11px;
     letter-spacing: 1px;
