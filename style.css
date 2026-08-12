@@ -19,7 +19,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: -10;
-  background: url("assets/sukoon-background.jpg") center center / cover no-repeat;
+  background: url("assets/sukoon-background.png") center center / cover no-repeat;
   transform: scale(1.015);
 }
 
